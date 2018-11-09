@@ -1,9 +1,12 @@
 package com.sevcabel.sevcabelport
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuInflater
 import com.sevcabel.sevcabelport.adapters.BottomBarAdapter
 import com.sevcabel.sevcabelport.maps.MapsFragment
 import com.sevcabel.sevcabelport.news.NewsFragment
@@ -34,10 +37,11 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        val toolbar:Toolbar = toolbar
         setSupportActionBar(toolbar)
         toolbar.setLogo(R.drawable.logo_white)
         title = getText(R.string.title_news)
@@ -55,4 +59,10 @@ class MainActivity : AppCompatActivity() {
         viewPager.currentItem = 0
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.calendar_toolbar_menu, menu)
+        return true
+    }
+
+
 }
