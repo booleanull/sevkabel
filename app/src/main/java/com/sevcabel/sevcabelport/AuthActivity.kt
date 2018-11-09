@@ -25,9 +25,11 @@ import com.vk.sdk.api.VKRequest
 import com.vk.sdk.api.VKError
 import com.vk.sdk.api.VKResponse
 import com.vk.sdk.api.VKRequest.VKRequestListener
-
-
-
+import com.vk.sdk.api.model.VKApiUser
+import com.vk.sdk.api.model.VKList
+import com.vk.sdk.api.model.VKUsersArray
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 const val TAG:String = "AuthActivity"
@@ -55,32 +57,39 @@ class AuthActivity : AppCompatActivity() {
     }
 
     fun writeVKInfoToDatabase(){
+        database = FirebaseDatabase.getInstance()
+        myRef = database.reference
+        val email: String = VKSdk.getAccessToken().email
+        val userID: String = VKSdk.getAccessToken().userId
+        VKApi.users().get().executeWithListener(object : VKRequest.VKRequestListener() {
+            override fun onComplete(response: VKResponse?) {
+                val user = (response!!.parsedModel as VKList<VKApiUser>)[0]
+                myRef.child("user").child(userID).child("email").setValue(email)
+                myRef.child("user").child(userID).child("surname").setValue(user.first_name)
+                myRef.child("user").child(userID).child("lastname").setValue(user.last_name)
+            }
+        })
 
+        val params = VKParameters()
+        params[VKApiConst.FIELDS] = "photo_max_orig"
 
+        val request = VKRequest("users.get", params)
+        request.executeWithListener(object : VKRequest.VKRequestListener() {
+            override fun onComplete(response: VKResponse ) {
+                super.onComplete(response)
+
+                val resp: JSONArray  = response.json.getJSONArray("response")
+                val user: JSONObject  = resp.getJSONObject(0)
+                val photoMaxOrigUrl: String = user.getString("photo_max_orig")
+                myRef.child("user").child(userID).child("photo").setValue(photoMaxOrigUrl)
+            }
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, object : VKCallback<VKAccessToken> {
                     override fun onResult(res: VKAccessToken) {
-                        database = FirebaseDatabase.getInstance()
-                        myRef = database.reference
-                        val request = VKApi.users().get()
-                        request.executeWithListener(object : VKRequestListener() {
-                            override fun onComplete(response: VKResponse?) {
-                                val names: String = request.parseModel.toString()
-                                myRef.child("users").child("us").setValue(names)
-
-                            }
-
-                            override fun onError(error: VKError?) {
-                                //Do error stuff
-                            }
-
-                            override fun attemptFailed(request: VKRequest?, attemptNumber: Int, totalAttempts: Int) {
-                                //I don't really believe in progress
-                            }
-                        })
-
+                        writeVKInfoToDatabase()
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         startActivity(intent)
                     }
