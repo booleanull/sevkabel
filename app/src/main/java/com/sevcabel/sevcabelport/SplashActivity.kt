@@ -14,8 +14,7 @@ class SplashActivity : AppCompatActivity() {
         finish()
     }
     private fun routeToOtherActivity(){
-        // ПОМЕНЯЙ НА АУФ АКТИВИТИ
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, AuthActivity::class.java)
         startActivity(intent)
     }
 }
