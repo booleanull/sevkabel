@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent">
     <android.support.v7.widget.CardView
         android:id="@+id/card_view_news"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
+        app:cardElevation="4dp"
         app:cardUseCompatPadding="true">
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,10 +27,12 @@
                 android:orientation="horizontal">
                 <TextView
                     android:id="@+id/news_date"
-                    tools:text="24-"
+                    tools:text="28-29 октября"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"/>
                 <TextView
+                    tools:text="2-3 января, в Порту, состоится первый зимний музыкальный фестиваль Петербурга One Love Fest"
                     android:id="@+id/news_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>

@@ -6,7 +6,7 @@
     tools:context=".news.NewsFragment">
 
     <android.support.v7.widget.RecyclerView
-        tools:listitem="@layout/recycler_view_item_news">
+        tools:listitem="@layout/recycler_view_item_news"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recycler_view_news"/>
