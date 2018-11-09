@@ -14,9 +14,18 @@ class SevcabelApplication : Application() {
 
     companion object {
         private var instance: SevcabelApplication? = null
+        private lateinit var userID: String
 
         fun getContext(): Context {
             return instance!!.applicationContext
+        }
+
+        fun getUserId(): String{
+            return userID
+        }
+
+        fun setUserID(userID: String){
+            this.userID = userID
         }
     }
 

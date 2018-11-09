@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.sevcabel.sevcabelport.utils.SevcabelApplication
 import com.vk.sdk.VKAccessToken
 import com.vk.sdk.VKCallback
 import com.vk.sdk.VKScope
@@ -61,6 +62,7 @@ class AuthActivity : AppCompatActivity() {
         myRef = database.reference
         val email: String = VKSdk.getAccessToken().email
         val userID: String = VKSdk.getAccessToken().userId
+        SevcabelApplication.setUserID(userID)
         VKApi.users().get().executeWithListener(object : VKRequest.VKRequestListener() {
             override fun onComplete(response: VKResponse?) {
                 val user = (response!!.parsedModel as VKList<VKApiUser>)[0]
