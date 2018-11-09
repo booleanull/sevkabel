@@ -27,6 +27,9 @@ import com.vk.sdk.api.VKResponse
 import com.vk.sdk.api.VKRequest.VKRequestListener
 import com.vk.sdk.api.model.VKApiUser
 import com.vk.sdk.api.model.VKList
+import com.vk.sdk.api.model.VKUsersArray
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 const val TAG:String = "AuthActivity"
@@ -64,6 +67,21 @@ class AuthActivity : AppCompatActivity() {
                 myRef.child("user").child(userID).child("email").setValue(email)
                 myRef.child("user").child(userID).child("surname").setValue(user.first_name)
                 myRef.child("user").child(userID).child("lastname").setValue(user.last_name)
+            }
+        })
+
+        val params = VKParameters()
+        params[VKApiConst.FIELDS] = "photo_max_orig"
+
+        val request = VKRequest("users.get", params)
+        request.executeWithListener(object : VKRequest.VKRequestListener() {
+            override fun onComplete(response: VKResponse ) {
+                super.onComplete(response)
+
+                val resp: JSONArray  = response.json.getJSONArray("response")
+                val user: JSONObject  = resp.getJSONObject(0)
+                val photoMaxOrigUrl: String = user.getString("photo_max_orig")
+                myRef.child("user").child(userID).child("photo").setValue(photoMaxOrigUrl)
             }
         })
     }
