@@ -14,7 +14,7 @@ class SplashActivity : AppCompatActivity() {
         finish()
     }
     private fun routeToOtherActivity(){
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, AuthActivity::class.java)
         startActivity(intent)
     }
 }

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "887373288692",
+    "firebase_url": "https://hackathon2018-sevcable.firebaseio.com",
+    "project_id": "hackathon2018-sevcable",
+    "storage_bucket": "hackathon2018-sevcable.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887373288692:android:9c47059570c0f153",
+        "android_client_info": {
+          "package_name": "com.sevcabel.sevcabelport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "887373288692-ms3b75iuffl9526bkql12h2qrtaji6aq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT9KQ11-9ebnx3YFg5w9cJ0t_CkRTekXA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
