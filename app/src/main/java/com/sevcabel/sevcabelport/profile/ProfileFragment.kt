@@ -23,7 +23,6 @@ class ProfileFragment : Fragment() {
     var url: String? = null
 
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         setUserInfo()
@@ -39,13 +38,9 @@ class ProfileFragment : Fragment() {
 
     private fun setUserInfo() {
         database = FirebaseDatabase.getInstance()
-        myRef = database.reference
+        myRef = database.reference.child("user").child(userID)
         myRef!!.addListenerForSingleValueEvent(object : ValueEventListener {
 
-<<<<<<< HEAD
-            myRef!!.addListenerForSingleValueEvent( object : ValueEventListener {
-=======
->>>>>>> 812d6683982a7519bb9a992338b04477d6321a47
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {

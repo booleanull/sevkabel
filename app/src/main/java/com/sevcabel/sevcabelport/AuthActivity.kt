@@ -56,7 +56,7 @@ class AuthActivity : AppCompatActivity() {
         if (VKSdk.isLoggedIn()) {
             val userID: String = VKSdk.getAccessToken().userId
             SevcabelApplication.setUserID(userID)
-            startMainActivity(userID)
+            startActivityWithIsAdminIntent(userID)
         }
 
     }
@@ -89,7 +89,7 @@ class AuthActivity : AppCompatActivity() {
         })
     }
 
-    fun startMainActivity (userID: String){
+    fun startActivityWithIsAdminIntent (userID: String){
         var isAdmin: Boolean
 
         userReference!!.addListenerForSingleValueEvent( object : ValueEventListener {
@@ -119,7 +119,7 @@ class AuthActivity : AppCompatActivity() {
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, object : VKCallback<VKAccessToken> {
                     override fun onResult(res: VKAccessToken) {
                         writeVKInfoToDatabase()
-                        startMainActivity(SevcabelApplication.getUserId())
+                        startActivityWithIsAdminIntent(SevcabelApplication.getUserId())
                     }
 
                     override fun onError(error: VKError) {
