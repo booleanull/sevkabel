@@ -31,6 +31,7 @@ class MarkerActivity : AppCompatActivity() {
             val database = FirebaseDatabase.getInstance()
             val rep = database.reference.child("markers")
             rep.child(SevcabelApplication.getMyMarker().id.toString()).removeValue()
+            finish()
         }
     }
 
