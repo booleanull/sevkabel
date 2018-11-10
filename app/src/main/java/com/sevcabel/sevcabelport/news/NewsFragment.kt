@@ -36,6 +36,11 @@ class NewsFragment : Fragment() {
         calendar_view.minDate = 1538341200000
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater!!.inflate(R.menu.calendar_toolbar_menu, menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.calendar_see -> {
@@ -44,9 +49,6 @@ class NewsFragment : Fragment() {
                 } else {
                     calendar_view.showIf(true, false)
                 }
-                return true
-            }
-            R.id.calendar_search -> {
                 return true
             }
         }
