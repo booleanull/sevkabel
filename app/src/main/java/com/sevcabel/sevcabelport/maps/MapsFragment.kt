@@ -108,9 +108,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
 
             if(admin) {
                 Toast.makeText(activity, getString(string.admint), Toast.LENGTH_LONG).show()
+                activity!!.setTitle(getString(string.ref))
             }
             else {
                 Toast.makeText(activity, getString(string.adminf), Toast.LENGTH_LONG).show()
+                activity!!.setTitle(getString(string.title_map))
             }
         }
 
@@ -119,9 +121,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
     }
 
     fun mapSetting() {
-        SevcabelApplication.getMap().setMinZoomPreference(18.0f)
+        SevcabelApplication.getMap().setMinZoomPreference(17.0f)
         SevcabelApplication.getMap().setMaxZoomPreference(21.0f)
-        SevcabelApplication.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(59.924331, 30.241246), 18f))
+        SevcabelApplication.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(59.924331, 30.241246), 17f))
         SevcabelApplication.getMap().setLatLngBoundsForCameraTarget(LatLngBounds(LatLng(59.923733, 30.239277), LatLng(59.924376, 30.242883)))
     }
 

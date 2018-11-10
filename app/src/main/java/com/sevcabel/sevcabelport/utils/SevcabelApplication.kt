@@ -2,14 +2,17 @@ package com.sevcabel.sevcabelport.utils
 
 import android.app.Application
 import android.content.Context
-import android.widget.Toast
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.firebase.FirebaseApp
-import com.google.firebase.database.*
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.sevcabel.sevcabelport.R
 import com.sevcabel.sevcabelport.maps.MyMarker
 import com.sevcabel.sevcabelport.news.News
 import com.vk.sdk.VKAccessToken
@@ -28,17 +31,19 @@ class SevcabelApplication : Application(), ChildEventListener {
 
         var newsList: MutableList<News> = mutableListOf()
 
-        private val markers : MutableList<MyMarker> = mutableListOf()
-        private val marks : MutableList<Marker> = mutableListOf()
-        private var admin : Boolean = false
-        private lateinit var myMarker : MyMarker
-        private lateinit var map : GoogleMap
+        lateinit var newsData: DatabaseReference
+        lateinit var database: FirebaseDatabase
+        private val markers: MutableList<MyMarker> = mutableListOf()
+        private val marks: MutableList<Marker> = mutableListOf()
+        private var admin: Boolean = false
+        private lateinit var myMarker: MyMarker
+        private lateinit var map: GoogleMap
 
         fun getContext(): Context {
             return instance!!.applicationContext
         }
 
-        fun getMap() : GoogleMap {
+        fun getMap(): GoogleMap {
             return map
         }
 
@@ -46,15 +51,15 @@ class SevcabelApplication : Application(), ChildEventListener {
             this.map = map
         }
 
-        fun getMarkers() : MutableList<MyMarker> {
+        fun getMarkers(): MutableList<MyMarker> {
             return markers
         }
 
-        fun getMarks() : MutableList<Marker> {
+        fun getMarks(): MutableList<Marker> {
             return marks
         }
 
-        fun getAdmin() : Boolean {
+        fun getAdmin(): Boolean {
             return admin
         }
 
@@ -62,7 +67,7 @@ class SevcabelApplication : Application(), ChildEventListener {
             this.admin = admin
         }
 
-        fun getMyMarker() : MyMarker {
+        fun getMyMarker(): MyMarker {
             return myMarker
         }
 
@@ -70,8 +75,7 @@ class SevcabelApplication : Application(), ChildEventListener {
             this.myMarker = myMarker
         }
 
-
-        fun getUserId(): String{
+        fun getUserId(): String {
             return userID
         }
 
@@ -81,13 +85,18 @@ class SevcabelApplication : Application(), ChildEventListener {
 
         fun updateMarkers() {
             map.clear()
-            var ja : Int = 0
-            for(i in markers) {
+            var ja: Int = 0
+            for (i in markers) {
                 var options = MarkerOptions().draggable(false).position(LatLng(i.markerPositionX, i.markerPositionY))
-                if(i.type == 0)
-                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                else
-                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                var b : Bitmap
+                if (i.type == 0) {
+                    b = BitmapFactory.decodeResource(getContext().resources, R.drawable.eve)
+                }
+                else {
+                    b = BitmapFactory.decodeResource(getContext().resources, R.drawable.fc)
+                }
+                b = Bitmap.createScaledBitmap(b, 96, 96, true)
+                options.icon(BitmapDescriptorFactory.fromBitmap(b))
                 marks[ja] = map.addMarker(options)
                 ja++
             }
@@ -106,9 +115,8 @@ class SevcabelApplication : Application(), ChildEventListener {
         super.onCreate()
         VKSdk.initialize(this)
         FirebaseApp.initializeApp(this)
-        val database = FirebaseDatabase.getInstance()
-        val newsData = database.getReference("news")
-
+        database = FirebaseDatabase.getInstance()
+        newsData = database.getReference("news")
         newsData.addChildEventListener(this)
     }
 
