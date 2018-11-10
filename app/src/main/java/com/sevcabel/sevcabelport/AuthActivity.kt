@@ -61,8 +61,6 @@ class AuthActivity : AppCompatActivity() {
 
     }
     fun writeVKInfoToDatabase() {
-        database = FirebaseDatabase.getInstance()
-        myRef = database.reference
         val email: String = VKSdk.getAccessToken().email
         val userID: String = VKSdk.getAccessToken().userId
         SevcabelApplication.setUserID(userID)
