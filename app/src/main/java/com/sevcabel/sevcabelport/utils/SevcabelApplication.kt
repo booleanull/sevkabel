@@ -20,11 +20,23 @@ class SevcabelApplication : Application(), ChildEventListener {
 
     companion object {
         private var instance: SevcabelApplication? = null
+<<<<<<< HEAD
+        private lateinit var userID: String
+=======
         var newsList: MutableList<News> = mutableListOf()
 
+>>>>>>> b6b633d5921b65ef5d5cf7691d4d772ce76fa43a
 
         fun getContext(): Context {
             return instance!!.applicationContext
+        }
+
+        fun getUserId(): String{
+            return userID
+        }
+
+        fun setUserID(userID: String){
+            this.userID = userID
         }
     }
 
