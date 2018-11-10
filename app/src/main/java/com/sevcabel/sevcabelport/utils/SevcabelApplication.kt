@@ -81,8 +81,11 @@ class SevcabelApplication : Application(), ChildEventListener {
 
         fun updateMarkers() {
             map.clear()
-            for(i in markers)
-                marks[i.id] = map.addMarker(MarkerOptions().draggable(false).position(LatLng(i.markerPositionX, i.markerPositionY)))
+            var ja : Int = 0
+            for(i in markers) {
+                marks[ja] = map.addMarker(MarkerOptions().draggable(false).position(LatLng(i.markerPositionX, i.markerPositionY)))
+                ja++
+            }
         }
     }
 
