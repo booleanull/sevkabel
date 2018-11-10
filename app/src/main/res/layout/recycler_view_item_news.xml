@@ -2,39 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <android.support.v7.widget.CardView
         android:id="@+id/card_view_news"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <ImageView
                 android:id="@+id/news_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:src="@tools:sample/avatars" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/news_date"
-                    tools:text="28-29 октября"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"/>
+                    android:layout_marginRight="5dp"
+                    tools:text="28-29 октября" />
+
                 <TextView
-                    tools:text="2-3 января, в Порту, состоится первый зимний музыкальный фестиваль Петербурга One Love Fest"
                     android:id="@+id/news_description"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    tools:text="2-3 января, в Порту, состоится первый зимний музыкальный фестиваль Петербурга One Love Fest" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

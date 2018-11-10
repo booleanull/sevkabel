@@ -12,7 +12,7 @@ import com.sevcabel.sevcabelport.utils.SevcabelApplication
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-const val TAG:String = "ProfileFragment"
+const val TAG: String = "ProfileFragment"
 
 class ProfileFragment : Fragment() {
     val userID: String = SevcabelApplication.getUserId()
@@ -33,11 +33,11 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     }
 
-    private fun setUserInfo(){
+    private fun setUserInfo(avatarView: ImageView, nameView: TextView) {
         database = FirebaseDatabase.getInstance()
-        myRef = database.reference.child("user").child(userID)
+        myRef = database.reference
+        myRef!!.addListenerForSingleValueEvent(object : ValueEventListener {
 
-                myRef!!.addListenerForSingleValueEvent( object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {

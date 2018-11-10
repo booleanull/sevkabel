@@ -27,7 +27,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 
-const val TAG:String = "AuthActivity"
+const val TAG: String = "AuthActivity"
 
 class AuthActivity : AppCompatActivity() {
 
@@ -45,7 +45,7 @@ class AuthActivity : AppCompatActivity() {
         Log.d(TAG, Arrays.toString(fingerprints))
 
         val signInButton: Button = this.sign_in_button
-        signInButton.setOnClickListener{_ ->
+        signInButton.setOnClickListener { _ ->
             VKSdk.login(this, *scope)
         }
 
@@ -60,8 +60,9 @@ class AuthActivity : AppCompatActivity() {
         }
 
     }
-
-    fun writeVKInfoToDatabase(){
+    fun writeVKInfoToDatabase() {
+        database = FirebaseDatabase.getInstance()
+        myRef = database.reference
         val email: String = VKSdk.getAccessToken().email
         val userID: String = VKSdk.getAccessToken().userId
         SevcabelApplication.setUserID(userID)
@@ -79,11 +80,11 @@ class AuthActivity : AppCompatActivity() {
 
         val request = VKRequest("users.get", params)
         request.executeWithListener(object : VKRequest.VKRequestListener() {
-            override fun onComplete(response: VKResponse ) {
+            override fun onComplete(response: VKResponse) {
                 super.onComplete(response)
 
-                val resp: JSONArray  = response.json.getJSONArray("response")
-                val user: JSONObject  = resp.getJSONObject(0)
+                val resp: JSONArray = response.json.getJSONArray("response")
+                val user: JSONObject = resp.getJSONObject(0)
                 val photoMaxOrigUrl: String = user.getString("photo_max_orig")
                 userReference.child(userID).child("photo").setValue(photoMaxOrigUrl)
             }
@@ -122,6 +123,7 @@ class AuthActivity : AppCompatActivity() {
                         writeVKInfoToDatabase()
                         startMainActivity(SevcabelApplication.getUserId())
                     }
+
                     override fun onError(error: VKError) {
                         Toast.makeText(applicationContext, "Ошибка", Toast.LENGTH_LONG).show()
                     }

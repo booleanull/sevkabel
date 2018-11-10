@@ -3,8 +3,13 @@ package com.sevcabel.sevcabelport.utils
 import android.app.Application
 import android.content.Context
 import android.widget.Toast
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.*
+import com.sevcabel.sevcabelport.maps.MyMarker
 import com.sevcabel.sevcabelport.news.News
 import com.vk.sdk.VKAccessToken
 import com.vk.sdk.VKAccessTokenTracker
@@ -15,21 +20,56 @@ class SevcabelApplication : Application(), ChildEventListener {
 
     init {
         instance = this
-
     }
 
     companion object {
         private var instance: SevcabelApplication? = null
         private lateinit var userID: String
-        private var isAdmin: Boolean = false
         var newsList: MutableList<News> = mutableListOf()
-
+        private val markers : MutableList<MyMarker> = mutableListOf()
+        private val marks : MutableList<Marker> = mutableListOf()
+        private var admin : Boolean = false
+        private lateinit var myMarker : MyMarker
+        private lateinit var map : GoogleMap
 
         fun getContext(): Context {
             return instance!!.applicationContext
         }
 
-        fun getUserId(): String {
+        fun getMap() : GoogleMap {
+            return map
+        }
+
+        fun setMap(map: GoogleMap) {
+            this.map = map
+        }
+
+        fun getMarkers() : MutableList<MyMarker> {
+            return markers
+        }
+
+        fun getMarks() : MutableList<Marker> {
+            return marks
+        }
+
+        fun getAdmin() : Boolean {
+            return admin
+        }
+
+        fun setAdmin(admin: Boolean) {
+            this.admin = admin
+        }
+
+        fun getMyMarker() : MyMarker {
+            return myMarker
+        }
+
+        fun setMyMarker(myMarker: MyMarker) {
+            this.myMarker = myMarker
+        }
+
+
+        fun getUserId(): String{
             return userID
         }
 
@@ -37,12 +77,10 @@ class SevcabelApplication : Application(), ChildEventListener {
             this.userID = userID
         }
 
-        fun isAdmin(): Boolean {
-            return isAdmin
-        }
-
-        fun setAdmin(isAdmin: Boolean) {
-            this.isAdmin = isAdmin
+        fun updateMarkers() {
+            map.clear()
+            for(i in markers)
+                marks[i.id] = map.addMarker(MarkerOptions().draggable(false).position(LatLng(i.markerPositionX, i.markerPositionY)))
         }
     }
 
@@ -60,8 +98,8 @@ class SevcabelApplication : Application(), ChildEventListener {
         FirebaseApp.initializeApp(this)
         val database = FirebaseDatabase.getInstance()
         val newsData = database.getReference("news")
-        newsData.addChildEventListener(this)
 
+        newsData.addChildEventListener(this)
     }
 
 

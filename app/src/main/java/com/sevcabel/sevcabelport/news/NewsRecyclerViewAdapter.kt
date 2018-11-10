@@ -13,8 +13,11 @@ import com.squareup.picasso.Picasso
 import java.util.ArrayList
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import com.sevcabel.sevcabelport.R
+import com.sevcabel.sevcabelport.R.id.calendar_view
 import com.sevcabel.sevcabelport.utils.SevcabelApplication
+import kotlinx.android.synthetic.main.fragment_news.*
 
 
 class NewsRecyclerViewAdapter(private val Datalist: MutableList<News>) : RecyclerView.Adapter<NewsRecyclerViewAdapter.MyViewHolder>() {
@@ -44,6 +47,7 @@ class NewsRecyclerViewAdapter(private val Datalist: MutableList<News>) : Recycle
         internal var image: ImageView
         internal var date: TextView
         internal var description: TextView
+
         init {
             image = itemView.findViewById(R.id.news_image)
             date = itemView.findViewById(R.id.news_date)
