@@ -7,12 +7,18 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import com.sevcabel.sevcabelport.adapters.BottomBarAdapter
 import com.sevcabel.sevcabelport.maps.MapsFragment
 import com.sevcabel.sevcabelport.news.NewsFragment
 import com.sevcabel.sevcabelport.profile.ProfileFragment
+import com.sevcabel.sevcabelport.utils.SevcabelApplication
 import com.sevcabel.sevcabelport.utils.getColor
+import com.sevcabel.sevcabelport.utils.showIf
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_news.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         false
     }
 
-    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -64,5 +69,30 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+            R.id.calendar_see -> {
+                if(calendarView.visibility == View.GONE){
+                    calendarView.showIf(false)
+                }else{
+                    calendarView.showIf(true,false)
+                }
+                return true
+            }
+            R.id.calendar_search -> {
+                // text_view.text = "Copy"
+                return true
+            }
+//    //        R.id.action_paste -> {
+//                text_view.text = "Paste"
+//                return true
+//            }
+//            R.id.action_new -> {
+//                text_view.text = "New"
+//                return true
+//            }
+//        }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }
