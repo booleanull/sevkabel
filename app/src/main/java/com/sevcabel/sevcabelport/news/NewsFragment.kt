@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
-import android.widget.Toast
-import com.sevcabel.sevcabelport.MainActivity
 import com.sevcabel.sevcabelport.R
 import com.sevcabel.sevcabelport.utils.SevcabelApplication
 import com.sevcabel.sevcabelport.utils.showIf
@@ -15,7 +13,6 @@ class NewsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_news, container, false)
-
     }
 
 
@@ -47,18 +44,8 @@ class NewsFragment : Fragment() {
                 return true
             }
             R.id.calendar_search -> {
-                // text_view.text = "Copy"
                 return true
             }
-//    //        R.id.action_paste -> {
-//                text_view.text = "Paste"
-//                return true
-//            }
-//            R.id.action_new -> {
-//                text_view.text = "New"
-//                return true
-//            }
-//        }
         }
         return super.onOptionsItemSelected(item)
     }
