@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import android.widget.Toast
+import com.sevcabel.sevcabelport.MainActivity
 import com.sevcabel.sevcabelport.R
 import com.sevcabel.sevcabelport.utils.SevcabelApplication
 import com.sevcabel.sevcabelport.utils.showIf
@@ -16,12 +18,20 @@ class NewsFragment : Fragment() {
 
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        calendarView.showIf(true,false)
+        calendar_view.showIf(true,false)
         val recyclerViewAdapterNews = NewsRecyclerViewAdapter(SevcabelApplication.newsList)
-        val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL,false)
+        val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         recycler_view_news.layoutManager = layoutManager
         recycler_view_news.adapter = recyclerViewAdapterNews
+       calendar_view.setOnDateChangeListener { _, year, month, dayOfMonth ->
+           for(i in 0 until SevcabelApplication.newsList.size){
+               if(SevcabelApplication.newsList[i].dateInt == (dayOfMonth.toString()+'.'+month.toString()+'.'+year.toString())){
+                   recycler_view_news.smoothScrollToPosition(i)
+               }
+           }
+       }
     }
 }

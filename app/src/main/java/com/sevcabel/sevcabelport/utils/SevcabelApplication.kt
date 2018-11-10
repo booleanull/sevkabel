@@ -29,11 +29,11 @@ class SevcabelApplication : Application(), ChildEventListener {
             return instance!!.applicationContext
         }
 
-        fun getUserId(): String{
+        fun getUserId(): String {
             return userID
         }
 
-        fun setUserID(userID: String){
+        fun setUserID(userID: String) {
             this.userID = userID
         }
     }

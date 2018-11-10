@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <CalendarView
-            android:id="@+id/calendarView"
+            android:id="@+id/calendar_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="100" />

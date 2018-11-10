@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
         }
-        false
+        true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,10 +72,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.calendar_see -> {
-                if(calendarView.visibility == View.GONE){
-                    calendarView.showIf(false)
+                if(calendar_view.visibility == View.GONE){
+                    calendar_view.showIf(false)
                 }else{
-                    calendarView.showIf(true,false)
+                    calendar_view.showIf(true,false)
                 }
                 return true
             }
@@ -95,4 +95,5 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 }
