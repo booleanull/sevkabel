@@ -66,7 +66,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
                 val m = p0.getValue(MyMarker::class.java)!!
                 SevcabelApplication.getMarkers().add(m)
                 SevcabelApplication.getMarks().add(SevcabelApplication.getMap().addMarker(MarkerOptions().position(LatLng(m.markerPositionX, m.markerPositionY))))
-                SevcabelApplication.updateMarkers()
+                //SevcabelApplication.updateMarkers()
             }
 
             override fun onChildRemoved(p0: DataSnapshot) {
