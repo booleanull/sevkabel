@@ -7,7 +7,7 @@
     <string name="title_activity_maps">Карта</string>
     <string name="search_bar">Поиск по названию</string>
     <string name="calendar_bar">Выберите дату</string>
-    <string name="sing_in_with_vk_button">Войти через ВКонтакте</string>
+    <string name="sing_in_with_vk_button">Войти</string>
     <string name="main">Основное</string>
     <string name="title">Название</string>
     <string name="text">Описание</string>
