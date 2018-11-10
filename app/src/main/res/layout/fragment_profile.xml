@@ -12,6 +12,15 @@
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
 
+<<<<<<< HEAD
+    <TextView
+        android:id="@+id/name_text"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"/>
+=======
         <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/avatar_image"
             android:layout_width="220dp"
@@ -30,6 +39,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
             android:textSize="18dp" />
+>>>>>>> 812d6683982a7519bb9a992338b04477d6321a47
 
     </LinearLayout>
 

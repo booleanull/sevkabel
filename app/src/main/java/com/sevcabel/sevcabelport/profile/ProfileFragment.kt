@@ -31,6 +31,10 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Picasso.get()
+                .load(url)
+                .into(avatar_image)
+        name_text.text = ("$surname1 $lastname1")
     }
 
     private fun setUserInfo(avatarView: ImageView, nameView: TextView) {
@@ -38,6 +42,10 @@ class ProfileFragment : Fragment() {
         myRef = database.reference
         myRef!!.addListenerForSingleValueEvent(object : ValueEventListener {
 
+<<<<<<< HEAD
+            myRef!!.addListenerForSingleValueEvent( object : ValueEventListener {
+=======
+>>>>>>> 812d6683982a7519bb9a992338b04477d6321a47
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
