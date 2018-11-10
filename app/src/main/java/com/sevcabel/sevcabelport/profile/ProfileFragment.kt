@@ -31,13 +31,17 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Picasso.get()
+                .load(url)
+                .into(avatar_image)
+        name_text.text = ("$surname1 $lastname1")
     }
 
     private fun setUserInfo(){
         database = FirebaseDatabase.getInstance()
         myRef = database.reference.child("user").child(userID)
 
-                myRef!!.addListenerForSingleValueEvent( object : ValueEventListener {
+            myRef!!.addListenerForSingleValueEvent( object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {

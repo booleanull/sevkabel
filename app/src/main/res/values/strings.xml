@@ -10,4 +10,5 @@
     <string name="sing_in_with_vk_button">Войти через ВКонтакте</string>
     <integer name="com_vk_sdk_AppId">6746743</integer>
     <string name="events_where_i_was">Мероприятия, на которых я был:</string>
+    <string name="review">Отзыв</string>
 </resources>
