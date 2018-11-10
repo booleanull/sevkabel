@@ -3,11 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     tools:context=".maps.MapsFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_map"/>
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        android:gravity="bottom|right">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionAdmin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:background="@color/primaryColor"
+            map:srcCompat="@android:drawable/sym_def_app_icon" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            map:srcCompat="@android:drawable/sym_def_app_icon" />
+
+    </LinearLayout>
 
 </FrameLayout>

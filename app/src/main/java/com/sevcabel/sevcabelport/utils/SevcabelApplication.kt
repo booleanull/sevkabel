@@ -3,8 +3,10 @@ package com.sevcabel.sevcabelport.utils
 import android.app.Application
 import android.content.Context
 import android.widget.Toast
+import com.google.android.gms.maps.GoogleMap
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.*
+import com.sevcabel.sevcabelport.maps.MyMarker
 import com.sevcabel.sevcabelport.news.News
 import com.vk.sdk.VKAccessToken
 import com.vk.sdk.VKAccessTokenTracker
@@ -24,10 +26,43 @@ class SevcabelApplication : Application(), ChildEventListener {
 
         var newsList: MutableList<News> = mutableListOf()
 
+        private val markers : MutableList<MyMarker> = mutableListOf()
+        private var admin : Boolean = false
+        private lateinit var myMarker : MyMarker
+        private lateinit var map : GoogleMap
 
         fun getContext(): Context {
             return instance!!.applicationContext
         }
+
+        fun getMap() : GoogleMap {
+            return map
+        }
+
+        fun setMap(map: GoogleMap) {
+            this.map = map
+        }
+
+        fun getMarkers() : MutableList<MyMarker> {
+            return markers
+        }
+
+        fun getAdmin() : Boolean {
+            return admin
+        }
+
+        fun setAdmin(admin: Boolean) {
+            this.admin = admin
+        }
+
+        fun getMyMarker() : MyMarker {
+            return myMarker
+        }
+
+        fun setMyMarker(myMarker: MyMarker) {
+            this.myMarker = myMarker
+        }
+
 
         fun getUserId(): String{
             return userID
