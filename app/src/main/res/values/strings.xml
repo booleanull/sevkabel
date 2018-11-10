@@ -8,5 +8,12 @@
     <string name="search_bar">Поиск по названию</string>
     <string name="calendar_bar">Выберите дату</string>
     <string name="sing_in_with_vk_button">Войти через ВКонтакте</string>
+    <string name="main">Основное</string>
+    <string name="title">Название</string>
+    <string name="text">Описание</string>
+    <string name="event">Событие</string>
+    <string name="food">Еда</string>
+    <string name="addmarker">Добавить маркер</string>
+    <string name="sub">Тип маркера</string>
     <integer name="com_vk_sdk_AppId">6746743</integer>
 </resources>

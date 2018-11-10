@@ -4,6 +4,9 @@ import android.app.Application
 import android.content.Context
 import android.widget.Toast
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.*
 import com.sevcabel.sevcabelport.maps.MyMarker
@@ -17,7 +20,6 @@ class SevcabelApplication : Application(), ChildEventListener {
 
     init {
         instance = this
-
     }
 
     companion object {
@@ -27,6 +29,7 @@ class SevcabelApplication : Application(), ChildEventListener {
         var newsList: MutableList<News> = mutableListOf()
 
         private val markers : MutableList<MyMarker> = mutableListOf()
+        private val marks : MutableList<Marker> = mutableListOf()
         private var admin : Boolean = false
         private lateinit var myMarker : MyMarker
         private lateinit var map : GoogleMap
@@ -45,6 +48,10 @@ class SevcabelApplication : Application(), ChildEventListener {
 
         fun getMarkers() : MutableList<MyMarker> {
             return markers
+        }
+
+        fun getMarks() : MutableList<Marker> {
+            return marks
         }
 
         fun getAdmin() : Boolean {
@@ -71,6 +78,12 @@ class SevcabelApplication : Application(), ChildEventListener {
         fun setUserID(userID: String){
             this.userID = userID
         }
+
+        fun updateMarkers() {
+            map.clear()
+            for(i in markers)
+                marks[i.id] = map.addMarker(MarkerOptions().draggable(false).position(LatLng(i.markerPositionX, i.markerPositionY)))
+        }
     }
 
     var vkAccessTokenTracker: VKAccessTokenTracker = object : VKAccessTokenTracker() {
@@ -87,8 +100,8 @@ class SevcabelApplication : Application(), ChildEventListener {
         FirebaseApp.initializeApp(this)
         val database = FirebaseDatabase.getInstance()
         val newsData = database.getReference("news")
-        newsData.addChildEventListener(this)
 
+        newsData.addChildEventListener(this)
     }
 
     override fun onCancelled(p0: DatabaseError) {

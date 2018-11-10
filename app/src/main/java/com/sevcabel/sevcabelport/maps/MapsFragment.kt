@@ -6,24 +6,25 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.database.*
 import com.sevcabel.sevcabelport.R
 import com.sevcabel.sevcabelport.utils.SevcabelApplication
 import kotlinx.android.synthetic.main.fragment_maps.*
-import kotlinx.android.synthetic.main.fragment_maps.view.*
-import com.google.android.gms.maps.MapsInitializer
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.Marker
 
 
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
-    lateinit var mapView : MapView
+    lateinit var mapView: MapView
+    lateinit var database: FirebaseDatabase
+    lateinit var rep : DatabaseReference
     var admin = false
-    lateinit var map : GoogleMap
+    lateinit var mark : MyMarker
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -38,13 +39,45 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
         } catch (e: Exception) {
             e.printStackTrace()
         }
+
         mapView.getMapAsync(this)
         return view
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
         SevcabelApplication.setMap(googleMap)
-        map = googleMap
+
+        val database = FirebaseDatabase.getInstance()
+        rep = database.reference.child("markers")
+        rep.addChildEventListener(object : ChildEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+
+            }
+
+            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                val m = p0.getValue(MyMarker::class.java)!!
+                SevcabelApplication.getMarkers().add(m)
+                SevcabelApplication.getMarks().add(SevcabelApplication.getMap().addMarker(MarkerOptions().position(LatLng(m.markerPositionX, m.markerPositionY))))
+                SevcabelApplication.updateMarkers()
+            }
+
+            override fun onChildRemoved(p0: DataSnapshot) {
+                val m = p0.getValue(MyMarker::class.java)!!
+                SevcabelApplication.getMarkers().indexOf(m)
+                val s = SevcabelApplication.getMarkers().indexOf(m)
+                SevcabelApplication.getMarkers().removeAt(s)
+                SevcabelApplication.getMarks().removeAt(s)
+                SevcabelApplication.updateMarkers()
+            }
+        })
 
         mapSetting()
 
@@ -54,45 +87,47 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
 
         floatingActionAdmin.setOnClickListener {
             admin = !admin
-            for (mark : MyMarker in SevcabelApplication.getMarkers()) {
-                mark.marker?.isDraggable = admin
+            for (mark: Marker in SevcabelApplication.getMarks()) {
+                mark.isDraggable = admin
             }
         }
 
-        map.setOnMarkerClickListener(this)
-        map.setOnMarkerDragListener(this)
+        SevcabelApplication.getMap().setOnMarkerClickListener(this)
+        SevcabelApplication.getMap().setOnMarkerDragListener(this)
     }
 
     fun mapSetting() {
-        map.setMinZoomPreference(18.0f)
-        map.setMaxZoomPreference(21.0f)
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(59.924331, 30.241246), 18f))
-        map.setLatLngBoundsForCameraTarget(LatLngBounds(LatLng(59.923733, 30.239277), LatLng(59.924376, 30.242883)))
+        SevcabelApplication.getMap().setMinZoomPreference(18.0f)
+        SevcabelApplication.getMap().setMaxZoomPreference(21.0f)
+        SevcabelApplication.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(59.924331, 30.241246), 18f))
+        SevcabelApplication.getMap().setLatLngBoundsForCameraTarget(LatLngBounds(LatLng(59.923733, 30.239277), LatLng(59.924376, 30.242883)))
     }
 
     override fun onMarkerClick(p0: Marker): Boolean {
-        if(!admin) {
-            for(mark in SevcabelApplication.getMarkers()) {
-                if(mark.marker?.position == p0.position) {
+        if (!admin) {
+            for (mark in SevcabelApplication.getMarkers()) {
+                if (LatLng(mark.markerPositionX, mark.markerPositionY) == p0.position) {
                     SevcabelApplication.setMyMarker(mark)
                 }
             }
             startActivity(Intent(activity, MarkerActivity::class.java))
         }
-
         return true
     }
 
     override fun onMarkerDragEnd(p0: Marker?) {
-
+        mark.markerPositionX = p0!!.position.latitude
+        mark.markerPositionY = p0!!.position.longitude
+        rep.child(mark.id.toString()).setValue(mark)
     }
 
     override fun onMarkerDragStart(p0: Marker?) {
-
+        for(m in SevcabelApplication.getMarks())
+            if(m == p0)
+                mark = SevcabelApplication.getMarkers()[SevcabelApplication.getMarks().indexOf(m)]
     }
 
     override fun onMarkerDrag(p0: Marker?) {
-        map.moveCamera(CameraUpdateFactory.newLatLng(p0!!.position))
     }
 
     override fun onResume() {

@@ -31,8 +31,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".maps.MarkerActivity" />
-        <activity android:name=".maps.AddMarkerActivity"></activity>
+        <activity android:name=".maps.MarkerActivity"
+            android:label="@string/addmarker"
+            android:theme="@style/AppThemeAb"/>
+        <activity android:name=".maps.AddMarkerActivity"
+            android:label="@string/addmarker"
+            android:theme="@style/AppThemeAb"/>
     </application>
 
 </manifest>
