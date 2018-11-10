@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.widget.Toast
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -16,7 +17,6 @@ import com.vk.sdk.VKAccessTokenTracker
 import com.vk.sdk.VKSdk
 
 class SevcabelApplication : Application(), ChildEventListener {
-
 
     init {
         instance = this
@@ -83,7 +83,12 @@ class SevcabelApplication : Application(), ChildEventListener {
             map.clear()
             var ja : Int = 0
             for(i in markers) {
-                marks[ja] = map.addMarker(MarkerOptions().draggable(false).position(LatLng(i.markerPositionX, i.markerPositionY)))
+                var options = MarkerOptions().draggable(false).position(LatLng(i.markerPositionX, i.markerPositionY))
+                if(i.type == 0)
+                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                else
+                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                marks[ja] = map.addMarker(options)
                 ja++
             }
         }
