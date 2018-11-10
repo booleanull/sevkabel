@@ -1,61 +1,58 @@
 package com.sevcabel.sevcabelport.profile
 
-import android.net.Uri
 import android.os.Bundle
-import android.support.annotation.NonNull
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import com.google.firebase.database.*
 import com.sevcabel.sevcabelport.R
 import com.sevcabel.sevcabelport.utils.SevcabelApplication
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
-import java.net.URL
 
 const val TAG: String = "ProfileFragment"
 
 class ProfileFragment : Fragment() {
     val userID: String = SevcabelApplication.getUserId()
-
     private lateinit var database: FirebaseDatabase
     private lateinit var myRef: DatabaseReference
+    var surname1: String? = null
+    var lastname1: String? = null
+    var url: String? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
+        setUserInfo()
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val avatarView: ImageView = avatar_image
-        val nameView: TextView = name_text
-        setUserInfo(avatarView, nameView)
-
+        Picasso.get()
+                .load(url)
+                .into(avatar_image)
+        name_text.text = ("$surname1 $lastname1")
+        setHasOptionsMenu(false)
     }
 
-    private fun setUserInfo(avatarView: ImageView, nameView: TextView) {
+    private fun setUserInfo() {
         database = FirebaseDatabase.getInstance()
-        myRef = database.reference
+        myRef = database.reference.child("user").child(userID)
         myRef!!.addListenerForSingleValueEvent(object : ValueEventListener {
+
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     Log.d(TAG, userID)
-                    val urlString = dataSnapshot.child("user").child(userID).child("photo").getValue(String::class.java)
-                    val surname = dataSnapshot.child("user").child(userID).child("surname").getValue(String::class.java)
-                    val lastname = dataSnapshot.child("user").child(userID).child("lastname").getValue(String::class.java)
-                    Log.d(TAG, urlString)
+                    url = dataSnapshot.child("photo").getValue(String::class.java)
+                    surname1 = dataSnapshot.child("surname").getValue(String::class.java)
+                    lastname1 = dataSnapshot.child("lastname").getValue(String::class.java)
                     Picasso.get()
-                            .load(Uri.parse(urlString))
-                            .into(avatarView)
-                    nameView.text = ("$surname $lastname")
+                            .load(url)
+                            .into(avatar_image)
+                    name_text.text = ("$surname1 $lastname1")
                 }
             }
 
@@ -63,6 +60,8 @@ class ProfileFragment : Fragment() {
                 // Failed to read value
             }
         })
+
+        return
 
     }
 }

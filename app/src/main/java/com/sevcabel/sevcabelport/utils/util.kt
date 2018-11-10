@@ -5,7 +5,7 @@ import android.view.View
 
 fun Int.getString() = SevcabelApplication.getContext().getString(this)
 
-//fun Int.getDrawable() = SevcabelApplication.getContext().getDrawable(this)
+fun Int.getDrawable() = SevcabelApplication.getContext().getDrawable(this)
 
 fun Int.getColor() = ContextCompat.getColor(SevcabelApplication.getContext(), this)
 

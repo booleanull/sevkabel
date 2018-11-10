@@ -24,4 +24,6 @@
     <string name="no">Нет</string>
     <string name="ref">Редактирование</string>
     <integer name="com_vk_sdk_AppId">6746743</integer>
+    <string name="events_where_i_was">Мероприятия, на которых я был:</string>
+    <string name="review">Отзыв</string>
 </resources>

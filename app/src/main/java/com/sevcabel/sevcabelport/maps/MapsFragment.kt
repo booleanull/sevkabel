@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
@@ -22,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_maps.*
 import android.content.res.Resources.NotFoundException
 import android.R.raw
 import android.util.Log
+import android.widget.Toast
 import com.google.android.gms.maps.model.MapStyleOptions
 
 
@@ -40,7 +40,6 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
         val view: View = inflater.inflate(layout.fragment_maps, container, false)
         mapView = view.findViewById(R.id.mapView) as MapView
         mapView.onCreate(savedInstanceState)
-
         mapView.onResume()
 
         try {

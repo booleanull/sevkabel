@@ -50,10 +50,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = toolbar
         setSupportActionBar(toolbar)
-        toolbar.setLogo(R.drawable.logo_white)
         title = getText(R.string.title_news)
         toolbar.setTitleTextColor(R.color.primaryTextColor.getColor())
-        toolbar.setTitleMargin(70, 1, 1, 1)
+        toolbar.setTitleMargin(155, 1, 1, 1)
         viewPager.setPagingEnabled(false)
         val pagerAdapter = BottomBarAdapter(supportFragmentManager)
         val fragmentMap = MapsFragment()
@@ -67,21 +66,5 @@ class MainActivity : AppCompatActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.calendar_toolbar_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item!!.itemId) {
-            R.id.calendar_see -> {
-                return false
-            }
-            R.id.calendar_search -> {
-                return false
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
 }
