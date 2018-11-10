@@ -42,6 +42,10 @@ class ProfileFragment : Fragment() {
         myRef = database.reference
         myRef!!.addListenerForSingleValueEvent(object : ValueEventListener {
 
+<<<<<<< HEAD
+            myRef!!.addListenerForSingleValueEvent( object : ValueEventListener {
+=======
+>>>>>>> 812d6683982a7519bb9a992338b04477d6321a47
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
