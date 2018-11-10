@@ -16,4 +16,5 @@
     <string name="addmarker">Добавить маркер</string>
     <string name="sub">Тип маркера</string>
     <integer name="com_vk_sdk_AppId">6746743</integer>
+    <string name="events_where_i_was">Мероприятия, на которых я был:</string>
 </resources>

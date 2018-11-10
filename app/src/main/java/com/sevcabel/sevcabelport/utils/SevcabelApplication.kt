@@ -25,9 +25,7 @@ class SevcabelApplication : Application(), ChildEventListener {
     companion object {
         private var instance: SevcabelApplication? = null
         private lateinit var userID: String
-
         var newsList: MutableList<News> = mutableListOf()
-
         private val markers : MutableList<MyMarker> = mutableListOf()
         private val marks : MutableList<Marker> = mutableListOf()
         private var admin : Boolean = false
@@ -103,6 +101,7 @@ class SevcabelApplication : Application(), ChildEventListener {
 
         newsData.addChildEventListener(this)
     }
+
 
     override fun onCancelled(p0: DatabaseError) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
