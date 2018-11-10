@@ -4,20 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".news.NewsFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <CalendarView
-            android:id="@+id/calendarView"
+            android:id="@+id/calendar_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="100" />
+
         <android.support.v7.widget.RecyclerView
-            tools:listitem="@layout/recycler_view_item_news"
+            android:id="@+id/recycler_view_news"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/recycler_view_news"/>
+            tools:listitem="@layout/recycler_view_item_news" />
     </LinearLayout>
 
 

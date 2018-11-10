@@ -9,21 +9,10 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal">
-
-    <com.makeramen.roundedimageview.RoundedImageView
-        android:id="@+id/avatar_image"
-        android:layout_height="220dp"
-        android:layout_width="220dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:scaleType="centerCrop"
-        app:riv_corner_radius="30dip"
-        app:riv_mutate_background="true"
-        app:riv_oval="true" />
+        android:orientation="vertical">
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/name_text"
         android:layout_gravity="center_horizontal"
@@ -31,6 +20,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"/>
+=======
+        <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/avatar_image"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="30dip"
+            app:riv_mutate_background="true"
+            app:riv_oval="true" />
+
+        <TextView
+            android:id="@+id/name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:textSize="18dp" />
+>>>>>>> 812d6683982a7519bb9a992338b04477d6321a47
 
     </LinearLayout>
 

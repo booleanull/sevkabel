@@ -3,6 +3,8 @@ package com.sevcabel.sevcabelport
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
@@ -40,13 +42,13 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
         }
-        false
+        true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val toolbar:Toolbar = toolbar
+        val toolbar: Toolbar = toolbar
         setSupportActionBar(toolbar)
         toolbar.setLogo(R.drawable.logo_white)
         title = getText(R.string.title_news)
@@ -64,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.currentItem = 0
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.calendar_toolbar_menu, menu)
         return true
@@ -72,27 +75,13 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.calendar_see -> {
-                if(calendarView.visibility == View.GONE){
-                    calendarView.showIf(false)
-                }else{
-                    calendarView.showIf(true,false)
-                }
-                return true
+                return false
             }
             R.id.calendar_search -> {
-                // text_view.text = "Copy"
-                return true
+                return false
             }
-//    //        R.id.action_paste -> {
-//                text_view.text = "Paste"
-//                return true
-//            }
-//            R.id.action_new -> {
-//                text_view.text = "New"
-//                return true
-//            }
-//        }
         }
         return super.onOptionsItemSelected(item)
     }
+
 }
