@@ -18,9 +18,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view : View = inflater.inflate(R.layout.fragment_maps, container, false)
-   //   val map : MapView = mapView
-     //   map.getMapAsync(this)
+        val view: View = inflater.inflate(R.layout.fragment_maps, container, false)
+        //   val map : MapView = mapView
+        //   map.getMapAsync(this)
         return view
     }
 

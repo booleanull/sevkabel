@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.net.URL
 
-const val TAG:String = "ProfileFragment"
+const val TAG: String = "ProfileFragment"
 
 class ProfileFragment : Fragment() {
     val userID: String = SevcabelApplication.getUserId()
@@ -40,10 +40,10 @@ class ProfileFragment : Fragment() {
 
     }
 
-    private fun setUserInfo(avatarView: ImageView, nameView: TextView){
+    private fun setUserInfo(avatarView: ImageView, nameView: TextView) {
         database = FirebaseDatabase.getInstance()
         myRef = database.reference
-        myRef!!.addListenerForSingleValueEvent( object : ValueEventListener {
+        myRef!!.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {

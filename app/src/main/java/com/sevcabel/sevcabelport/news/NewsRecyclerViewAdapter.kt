@@ -46,6 +46,7 @@ class NewsRecyclerViewAdapter(private val Datalist: MutableList<News>) : Recycle
         internal var image: ImageView
         internal var date: TextView
         internal var description: TextView
+
         init {
             image = itemView.findViewById(R.id.news_image)
             date = itemView.findViewById(R.id.news_date)
