@@ -13,5 +13,5 @@
         android:id="@+id/calendar_see"
         android:icon="@drawable/baseline_date_range_white_48"
         android:title="@string/calendar_bar"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>

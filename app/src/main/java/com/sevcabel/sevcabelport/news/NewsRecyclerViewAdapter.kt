@@ -55,7 +55,7 @@ class NewsRecyclerViewAdapter(private val Datalist: MutableList<News>) : Recycle
         }
 
         fun bind(data: News) {
-            Picasso.get().load(data.image).into(image)
+            Picasso.get().load(data.image).centerCrop().resize(1200,700).into(image)
             date.text = data.date
             description.text = data.description
         }

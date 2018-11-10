@@ -25,12 +25,15 @@ class NewsFragment : Fragment() {
         recycler_view_news.layoutManager = layoutManager
         recycler_view_news.adapter = recyclerViewAdapterNews
         calendar_view.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            calendar_view.showIf(true,false)
             for (i in 0 until SevcabelApplication.newsList.size) {
                 if (SevcabelApplication.newsList[i].dateInt == (dayOfMonth.toString() + '.' + month.toString() + '.' + year.toString())) {
                     recycler_view_news.smoothScrollToPosition(i)
                 }
             }
         }
+        calendar_view.maxDate = 1551301200000
+        calendar_view.minDate = 1538341200000
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

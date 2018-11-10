@@ -34,6 +34,7 @@ class ProfileFragment : Fragment() {
                 .load(url)
                 .into(avatar_image)
         name_text.text = ("$surname1 $lastname1")
+        setHasOptionsMenu(false)
     }
 
     private fun setUserInfo() {
