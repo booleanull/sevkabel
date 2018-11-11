@@ -26,6 +26,8 @@ class MarkerActivity : AppCompatActivity() {
             image.setBackgroundResource(R.drawable.event)
         }
         else {
+            cardd.visibility = View.GONE
+            imageF.visibility = View.VISIBLE
             image.setBackgroundResource(R.drawable.food)
             supportActionBar!!.title = R.string.food.getString()
         }
