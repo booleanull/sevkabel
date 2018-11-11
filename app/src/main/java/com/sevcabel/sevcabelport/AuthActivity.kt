@@ -107,6 +107,12 @@ class AuthActivity : AppCompatActivity() {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    val surname: String? = dataSnapshot.child(userID).child("surname").getValue(String::class.java)
+                    val lastname: String? = dataSnapshot.child(userID).child("lastname").getValue(String::class.java)
+                    val avatarLink: String? = dataSnapshot.child(userID).child("photo").getValue(String::class.java)
+                    SevcabelApplication.setSurname(surname!!)
+                    SevcabelApplication.setLastname(lastname!!)
+                    SevcabelApplication.setAvatarLink(avatarLink!!)
                     isAdmin = try {
                         dataSnapshot.child(userID).child("admin")
                                 .getValue(String::class.java).equals("admin")

@@ -6,32 +6,12 @@
     tools:context=".profile.ProfileFragment">
 
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/avatar_image"
-            android:layout_width="220dp"
-            android:layout_height="220dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="24dp"
-            android:scaleType="centerCrop"
-            app:riv_corner_radius="30dip"
-            app:riv_mutate_background="true"
-            app:riv_oval="true" />
-
-        <TextView
-            android:id="@+id/name_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:textSize="18dp" />
-
-    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/black"
+        android:dividerHeight="1dp"/>
 
 
 </FrameLayout>

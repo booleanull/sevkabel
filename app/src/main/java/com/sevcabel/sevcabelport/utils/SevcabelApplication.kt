@@ -25,6 +25,9 @@ class SevcabelApplication : Application(), ChildEventListener {
     companion object {
         private var instance: SevcabelApplication? = null
         private lateinit var userID: String
+        private lateinit var surname: String
+        private lateinit var lastname: String
+        private lateinit var avatarLink: String
         var newsList: MutableList<News> = mutableListOf()
         private val markers : MutableList<MyMarker> = mutableListOf()
         private val marks : MutableList<Marker> = mutableListOf()
@@ -58,6 +61,30 @@ class SevcabelApplication : Application(), ChildEventListener {
 
         fun setAdmin(admin: Boolean) {
             this.admin = admin
+        }
+
+        fun getSurname() : String {
+            return surname
+        }
+
+        fun setSurname(surname: String) {
+            this.surname = surname
+        }
+
+        fun getLastname() : String {
+            return lastname
+        }
+
+        fun setLastname(lastname: String) {
+            this.lastname = lastname
+        }
+
+        fun getAvatarLink() : String {
+            return avatarLink
+        }
+
+        fun setAvatarLink(avatarLink: String) {
+            this.avatarLink = avatarLink
         }
 
         fun getMyMarker() : MyMarker {
