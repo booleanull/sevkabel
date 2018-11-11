@@ -1,6 +1,8 @@
 package com.sevcabel.sevcabelport
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -53,6 +55,8 @@ class MainActivity : AppCompatActivity() {
         title = getText(R.string.title_news)
         toolbar.setTitleTextColor(R.color.primaryTextColor.getColor())
         toolbar.setTitleMargin(155, 1, 1, 1)
+        logo_toolbar.setOnClickListener { val intent = Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://vk.com/sevcableport"))
+        startActivity(intent)}
         viewPager.setPagingEnabled(false)
         val pagerAdapter = BottomBarAdapter(supportFragmentManager)
         val fragmentMap = MapsFragment()
