@@ -23,7 +23,7 @@ class MarkerActivity : AppCompatActivity() {
 
         if(SevcabelApplication.getMyMarker().type == 0) {
             supportActionBar!!.title = R.string.event.getString()
-            image.setBackgroundResource(R.drawable.logo)
+            image.setBackgroundResource(R.drawable.event)
         }
         else {
             image.setBackgroundResource(R.drawable.food)
@@ -43,6 +43,7 @@ class MarkerActivity : AppCompatActivity() {
                         val database = FirebaseDatabase.getInstance()
                         val rep = database.reference.child("markers")
                         rep.child(SevcabelApplication.getMyMarker().id.toString()).removeValue()
+                        SevcabelApplication.updateMarkers()
                         finish()
                     }
 

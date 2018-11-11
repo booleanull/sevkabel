@@ -15,7 +15,7 @@
     <string name="food">Фудкорт</string>
     <string name="addmarker">Добавить маркер</string>
     <string name="sub">Тип маркера</string>
-    <string name="admint">Вы вошли в режим редактирования маркеров</string>
+    <string name="admint">Сейчас вы можете двигать маркеры по карте</string>
     <string name="adminf">Вы вышли из режима редактирования маркеров</string>
     <string name="valid">Ошибка! Проверьте введенные данные.</string>
     <string name="accept">Подтверждение</string>
