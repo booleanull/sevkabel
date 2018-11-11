@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.firebase.database.*
 import com.sevcabel.sevcabelport.utils.SevcabelApplication
@@ -37,6 +39,8 @@ class AuthActivity : AppCompatActivity() {
     )
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private val userReference: DatabaseReference = database.getReference("user")
+    lateinit var signInButton: Button
+    lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +48,8 @@ class AuthActivity : AppCompatActivity() {
         val fingerprints: Array<String> = VKUtil.getCertificateFingerprint(this, this.packageName)
         Log.d(TAG, Arrays.toString(fingerprints))
 
-        val signInButton: Button = this.sign_in_button
+        progressBar = this.progress_bar
+        signInButton = this.sign_in_button
         signInButton.setOnClickListener { _ ->
             VKSdk.login(this, *scope)
         }
@@ -54,7 +59,10 @@ class AuthActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         if (VKSdk.isLoggedIn()) {
+            progressBar.visibility = View.VISIBLE
             val userID: String = VKSdk.getAccessToken().userId
+            signInButton.visibility = View.GONE
+
             SevcabelApplication.setUserID(userID)
             startActivityWithIsAdminIntent(userID)
         }
@@ -99,6 +107,12 @@ class AuthActivity : AppCompatActivity() {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
+                    val surname: String? = dataSnapshot.child(userID).child("surname").getValue(String::class.java)
+                    val lastname: String? = dataSnapshot.child(userID).child("lastname").getValue(String::class.java)
+                    val avatarLink: String? = dataSnapshot.child(userID).child("photo").getValue(String::class.java)
+                    SevcabelApplication.setSurname(surname!!)
+                    SevcabelApplication.setLastname(lastname!!)
+                    SevcabelApplication.setAvatarLink(avatarLink!!)
                     isAdmin = try {
                         dataSnapshot.child(userID).child("admin")
                                 .getValue(String::class.java).equals("admin")
@@ -108,7 +122,9 @@ class AuthActivity : AppCompatActivity() {
                     Log.d(TAG, "onDataChange $isAdmin")
                     val intent = Intent(applicationContext, MainActivity::class.java)
                     SevcabelApplication.setAdmin(isAdmin)
+                    progressBar.visibility = View.GONE
                     startActivity(intent)
+                    finish()
 
                 }
             }

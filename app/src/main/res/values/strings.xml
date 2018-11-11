@@ -7,7 +7,7 @@
     <string name="title_activity_maps">Карта</string>
     <string name="search_bar">Поиск по названию</string>
     <string name="calendar_bar">Выберите дату</string>
-    <string name="sing_in_with_vk_button">Войти через ВКонтакте</string>
+    <string name="sing_in_with_vk_button">Войти</string>
     <string name="main">Основное</string>
     <string name="title">Название</string>
     <string name="text">Описание</string>
@@ -25,5 +25,13 @@
     <string name="ref">Редактирование</string>
     <integer name="com_vk_sdk_AppId">6746743</integer>
     <string name="events_where_i_was">Мероприятия, на которых я был:</string>
-    <string name="review">Отзыв</string>
+    <string name="review">Оставить отзыв</string>
+    <string name="comment">Оставить отзыв</string>
+    <string name="hide">Скрыть</string>
+    <string name="comm">Спасибо за отзыв!</string>
+    <string name="send">Отправить</string>
+    <string name="add">Добавить</string>
+    <string name="req">Ваш запрос отправлен на модерацию</string>
+    <string name="sendreq">Отправить заявку</string>
+    <string name="titlen">Заголовок</string>
 </resources>

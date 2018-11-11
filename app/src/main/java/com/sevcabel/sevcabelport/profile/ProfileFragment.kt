@@ -1,67 +1,57 @@
 package com.sevcabel.sevcabelport.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.google.firebase.database.*
 import com.sevcabel.sevcabelport.R
+import com.sevcabel.sevcabelport.news.News
 import com.sevcabel.sevcabelport.utils.SevcabelApplication
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_profile.view.*
+import android.support.v7.widget.DividerItemDecoration
+import android.view.*
+import com.sevcabel.sevcabelport.utils.showIf
+import kotlinx.android.synthetic.main.fragment_news.*
+
 
 const val TAG: String = "ProfileFragment"
 
 class ProfileFragment : Fragment() {
-    val userID: String = SevcabelApplication.getUserId()
-    private lateinit var database: FirebaseDatabase
-    private lateinit var myRef: DatabaseReference
-    var surname1: String? = null
-    var lastname1: String? = null
-    var url: String? = null
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        setUserInfo()
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        val v = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        val recyclerView = v.recycler_view
+        val profileAdapter = ProfileAdapter(layoutInflater, SevcabelApplication.newsList)
+        val layoutManager: RecyclerView.LayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = profileAdapter
+        return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Picasso.get()
-                .load(url)
-                .into(avatar_image)
-        name_text.text = ("$surname1 $lastname1")
-        setHasOptionsMenu(false)
+        setHasOptionsMenu(true)
     }
 
-    private fun setUserInfo() {
-        database = FirebaseDatabase.getInstance()
-        myRef = database.reference.child("user").child(userID)
-        myRef!!.addListenerForSingleValueEvent(object : ValueEventListener {
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater!!.inflate(R.menu.popup, menu)
+    }
 
-
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    Log.d(TAG, userID)
-                    url = dataSnapshot.child("photo").getValue(String::class.java)
-                    surname1 = dataSnapshot.child("surname").getValue(String::class.java)
-                    lastname1 = dataSnapshot.child("lastname").getValue(String::class.java)
-                    Picasso.get()
-                            .load(url)
-                            .into(avatar_image)
-                    name_text.text = ("$surname1 $lastname1")
-                }
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+            R.id.more -> {
+                val intent = Intent(activity, EventActivity::class.java)
+                startActivity(intent)
+                return true
             }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Failed to read value
-            }
-        })
-
-        return
-
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
