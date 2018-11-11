@@ -3,6 +3,7 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+<<<<<<< HEAD
         <entry key="imageWizard">
           <value>
             <PersistentState>
@@ -56,6 +57,8 @@
             </PersistentState>
           </value>
         </entry>
+=======
+>>>>>>> 3c9c19c8352e95e795dae3d06f14068e8c97ef76
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -71,7 +74,11 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
+<<<<<<< HEAD
                                       <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_comment_black_24dp.xml" />
+=======
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_delete_black_24dp.xml" />
+>>>>>>> 3c9c19c8352e95e795dae3d06f14068e8c97ef76
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -81,9 +88,14 @@
                         </option>
                         <option name="values">
                           <map>
+<<<<<<< HEAD
                             <entry key="color" value="bbbbbb" />
                             <entry key="outputName" value="ic_comment_black_24dp" />
                             <entry key="sourceFile" value="C:\Users\Максим" />
+=======
+                            <entry key="outputName" value="ic_delete_black_24dp" />
+                            <entry key="sourceFile" value="C:\Users\booleanull" />
+>>>>>>> 3c9c19c8352e95e795dae3d06f14068e8c97ef76
                           </map>
                         </option>
                       </PersistentState>

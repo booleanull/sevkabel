@@ -16,6 +16,7 @@ import android.net.Uri
 import android.widget.Toast
 import com.sevcabel.sevcabelport.R
 import com.sevcabel.sevcabelport.R.id.calendar_view
+import com.sevcabel.sevcabelport.R.id.center
 import com.sevcabel.sevcabelport.utils.SevcabelApplication
 import kotlinx.android.synthetic.main.fragment_news.*
 
@@ -47,15 +48,18 @@ class NewsRecyclerViewAdapter(private val Datalist: MutableList<News>) : Recycle
         internal var image: ImageView
         internal var date: TextView
         internal var description: TextView
+        internal var title: TextView
 
         init {
+            title = itemView.findViewById(R.id.news_title)
             image = itemView.findViewById(R.id.news_image)
             date = itemView.findViewById(R.id.news_date)
             description = itemView.findViewById(R.id.news_description)
         }
 
         fun bind(data: News) {
-            Picasso.get().load(data.image).centerCrop().resize(1200,700).into(image)
+            title.text = data.title
+            Picasso.get().load(data.image).into(image)
             date.text = data.date
             description.text = data.description
         }

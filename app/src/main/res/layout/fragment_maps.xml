@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
     tools:context=".maps.MapsFragment">
 
     <com.google.android.gms.maps.MapView
@@ -14,24 +14,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_margin="16dp"
-        android:gravity="bottom|right">
+        android:gravity="bottom|right"
+        android:orientation="vertical">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionAdmin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#FFF"
             android:clickable="true"
-            android:background="@color/primaryColor"
-            map:srcCompat="@android:drawable/sym_def_app_icon" />
+            android:tint="@color/primaryColor"
+            map:srcCompat="@drawable/ic_edit_location_black_24dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#FFF"
             android:clickable="true"
-            map:srcCompat="@android:drawable/sym_def_app_icon" />
+            android:tint="@color/primaryColor"
+            map:srcCompat="@drawable/ic_add_black_24dp" />
 
     </LinearLayout>
 

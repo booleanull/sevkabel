@@ -1,6 +1,7 @@
 package com.sevcabel.sevcabelport.maps
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -13,8 +14,17 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.database.*
 import com.sevcabel.sevcabelport.R
+import com.sevcabel.sevcabelport.R.*
 import com.sevcabel.sevcabelport.utils.SevcabelApplication
+import com.sevcabel.sevcabelport.utils.getColor
 import kotlinx.android.synthetic.main.fragment_maps.*
+import android.content.res.Resources.NotFoundException
+import android.R.raw
+import android.util.Log
+import android.widget.Toast
+import com.google.android.gms.maps.model.MapStyleOptions
+
+
 
 
 class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
@@ -27,7 +37,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(R.layout.fragment_maps, container, false)
+        val view: View = inflater.inflate(layout.fragment_maps, container, false)
         mapView = view.findViewById(R.id.mapView) as MapView
         mapView.onCreate(savedInstanceState)
         mapView.onResume()
@@ -44,6 +54,11 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
 
     override fun onMapReady(googleMap: GoogleMap) {
         SevcabelApplication.setMap(googleMap)
+
+        googleMap.setMapStyle(
+                MapStyleOptions.loadRawResourceStyle(
+                        activity, R.raw.style_json))
+
 
         val database = FirebaseDatabase.getInstance()
         rep = database.reference.child("markers")
@@ -64,7 +79,7 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
                 val m = p0.getValue(MyMarker::class.java)!!
                 SevcabelApplication.getMarkers().add(m)
                 SevcabelApplication.getMarks().add(SevcabelApplication.getMap().addMarker(MarkerOptions().position(LatLng(m.markerPositionX, m.markerPositionY))))
-                //SevcabelApplication.updateMarkers()
+                SevcabelApplication.updateMarkers()
             }
 
             override fun onChildRemoved(p0: DataSnapshot) {
@@ -88,6 +103,16 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
             for (mark: Marker in SevcabelApplication.getMarks()) {
                 mark.isDraggable = admin
             }
+            R.color.design_default_color_primary.getColor()
+
+            if(admin) {
+                Toast.makeText(activity, getString(string.admint), Toast.LENGTH_LONG).show()
+                activity!!.setTitle(getString(string.ref))
+            }
+            else {
+                Toast.makeText(activity, getString(string.adminf), Toast.LENGTH_LONG).show()
+                activity!!.setTitle(getString(string.title_map))
+            }
         }
 
         SevcabelApplication.getMap().setOnMarkerClickListener(this)
@@ -95,9 +120,9 @@ class MapsFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerDragListe
     }
 
     fun mapSetting() {
-        SevcabelApplication.getMap().setMinZoomPreference(18.0f)
+        SevcabelApplication.getMap().setMinZoomPreference(17.0f)
         SevcabelApplication.getMap().setMaxZoomPreference(21.0f)
-        SevcabelApplication.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(59.924331, 30.241246), 18f))
+        SevcabelApplication.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(59.924331, 30.241246), 17f))
         SevcabelApplication.getMap().setLatLngBoundsForCameraTarget(LatLngBounds(LatLng(59.923733, 30.239277), LatLng(59.924376, 30.242883)))
     }
 
