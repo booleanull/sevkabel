@@ -41,7 +41,7 @@
         app:menu="@menu/navigation" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/logo_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"

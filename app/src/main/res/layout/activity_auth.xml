@@ -3,13 +3,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF"
     tools:context=".AuthActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_gravity="top"
+        android:src="@drawable/lenta" />
+
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_gravity="top|center_horizontal"
+        android:src="@drawable/logo_sev_kabel" />
 
     <Button
         android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/sing_in_with_vk_button" />
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
+        android:background="@color/vk_share_top_blue_color"
+        android:drawableLeft="@drawable/ic_vk_blue_logo"
+        android:text="@string/sing_in_with_vk_button"
+        android:textColor="#FFF"
+        android:textSize="18dp"
+        android:padding="10dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
+        android:src="@drawable/lenta" />
 
 </FrameLayout>

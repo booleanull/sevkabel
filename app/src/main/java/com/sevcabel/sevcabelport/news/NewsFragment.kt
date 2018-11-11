@@ -33,6 +33,11 @@ class NewsFragment : Fragment() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater!!.inflate(R.menu.calendar_toolbar_menu, menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.calendar_see -> {
